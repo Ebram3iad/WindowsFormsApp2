@@ -337,9 +337,9 @@ namespace WindowsFormsApp2
             double quantity = Convert.ToDouble(dataviewprod.GetRowCellValue(dataviewprod.FocusedRowHandle, colQuantity));
             double discount = Convert.ToDouble(dataviewprod.GetRowCellValue(dataviewprod.FocusedRowHandle, colDiscount));
             double unitPrice = Convert.ToDouble(dataviewprod.GetRowCellValue(dataviewprod.FocusedRowHandle, colUnitPrice));
-            double netDiscountValue = unitPrice * quantity * (discount / 100);
+            double netDiscountValue = unitPrice  * (discount / 100);
             if (netDiscountValue >= unitPrice)
-            {
+            {               
                 dataviewprod.SetColumnError(colDiscount, $"The Discount value should be less than this value");
                 dataviewprod.SetColumnError(null, "Invalid data");
                 e.Valid = false;
@@ -531,7 +531,7 @@ namespace WindowsFormsApp2
                     if (db.State == ConnectionState.Closed)
                     {
                         db.Open();
-                        string query = "select d.OrderID,d.ProductID,p.ProductName,d.Quantity,d.UnitPrice,d.Discount from [Order Details] d inner join Products p on d.ProductID = p.ProductID " +
+                        string query = "select d.OrderID,d.ProductID,p.ProductName,d.Quantity,d.UnitPrice,d.Discount*100 as Discount from [Order Details] d inner join Products p on d.ProductID = p.ProductID " +
                             $"where d.OrderID = {ordersObj.OrderID}";
                        // string cmd = $"select * from Orders where OrderID={Id} ";
                         currentorder = db.Query<OrderDetail>(query, commandType: CommandType.Text).ToList();

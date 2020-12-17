@@ -94,7 +94,7 @@ namespace WindowsFormsApp2
             {
                 if (db.State == ConnectionState.Closed)
                 {
-                    String cmd = $"update   [Order Details] set ProductID=@ProductID, OrderID=@OrderID,Quantity=@Quantity, UnitPrice=@UnitPrice,Discount=@Discount where OrderID="+orderId + "and ProductID=@ProductID ";
+                    String cmd = $"update   [Order Details] set ProductID=@ProductID, OrderID=@OrderID,Quantity=@Quantity, UnitPrice=@UnitPrice,Discount=@Discount/100 where OrderID="+orderId + " and ProductID=@ProductID ";
 
 
         db.Execute(cmd, this);
