@@ -25,6 +25,7 @@ namespace WindowsFormsApp2
         public decimal UnitPrice { get; set; }
         public bool Discontinued { get; set; }
 
+        //Get Products By Id
         public  static Products getproduct(int id)
         {
             string cmd = $"select * from Products where ProductID = {id} ";
@@ -44,8 +45,26 @@ namespace WindowsFormsApp2
             }
 
             else
-                return null;
-               
+                return null;               
         }
+
+        // Get Products by matching Category Id 
+        public static List<Products> GetProducts()
+        {
+            List<Products> list = null;
+            using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["cn"].ConnectionString))
+            {
+                if (db.State == ConnectionState.Closed)
+                {
+                    db.Open();
+                    string query = "select  ProductID,ProductName,c.CategoryID,QuantityPerUnit,UnitPrice,Discontinued FROM Products p inner join Categories c on p.CategoryID=c.CategoryID";
+
+                    list = db.Query<Products>(query, commandType: CommandType.Text).ToList();
+                }
+            }
+            return list;
+        }
+
+        
     }
 }

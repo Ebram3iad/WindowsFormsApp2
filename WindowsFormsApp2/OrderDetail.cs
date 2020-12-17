@@ -32,6 +32,25 @@ namespace WindowsFormsApp2
             }
         }
 
+        //Get List<OrdersDetails> by Order Id 
+        public static List<OrderDetail> GetOrderDetailsById(int id)
+        {
+            List<OrderDetail> OrderDetailsList = null;
+            using (SqlConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["cn"].ConnectionString))
+            {
+                if (db.State == ConnectionState.Closed)
+                {
+                    db.Open();
+                    //string query = "select d.OrderID,p.ProductName,d.Quantity,d.Discount,d.UnitPrice from [Order Details] d inner join Products p on d.ProductID = p.ProductID " +
+                    //    $"where d.OrderID = '{id}'";
+                    string query = "select d.OrderID,d.ProductID,p.ProductName,d.Quantity,d.UnitPrice,d.Discount*100 as Discount from [Order Details] d inner join Products p on d.ProductID = p.ProductID " +
+                                     $"where d.OrderID = {id}";
+                    OrderDetailsList = db.Query<OrderDetail>(query, commandType: CommandType.Text).ToList();                   
+                }
+            }
+            return OrderDetailsList;
+        }
+
         public bool Insert()
         {
             using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["cn"].ConnectionString))
@@ -41,7 +60,7 @@ namespace WindowsFormsApp2
                     if (db.State == ConnectionState.Closed)
                     {
 
-                        String cmd = $"insert into [Order Details] (OrderID,ProductID,Quantity,UnitPrice,Discount) values(" + Orders.GetOrderId() + ",@ProductID,@Quantity,@UnitPrice,@Discount )";
+                        String cmd = $"insert into [Order Details] (OrderID,ProductID,Quantity,UnitPrice,Discount) values(" + Orders.GetOrderId() + ",@ProductID,@Quantity,@UnitPrice,@Discount/100 )";
                             
                         db.Execute(cmd, this);
                     }

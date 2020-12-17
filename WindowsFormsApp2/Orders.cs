@@ -32,28 +32,22 @@ namespace WindowsFormsApp2
 
         public bool Insert()
         {
-
-
             IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["cn"].ConnectionString);
-           
-                try
+            try
+            {
+                if (db.State == ConnectionState.Closed)
                 {
-                    if (db.State == ConnectionState.Closed)
-                    {
+                    String cmd = $"insert into Orders (OrderDate,CustomerID , Freight, ShipCity,ShipCountry) values(@OrderDate,'ANTON',@Total,@Remain,@Paid)";
 
-                        String cmd = $"insert into Orders (OrderDate,CustomerID , Freight, ShipCity,ShipCountry) values(@OrderDate,'ANTON',@Total,@Remain,@Paid)";
-
-
-                        db.Execute(cmd, this);
-
-                    }
-                    return true;
+                    db.Execute(cmd, this);
                 }
-                catch (Exception err)
-                {
-                    string message = err.Message;
-                    return false;
-                }
+                return true;
+            }
+            catch (Exception err)
+            {
+                string message = err.Message;
+                return false;
+            }
 
         }
         public static int GetOrderId()
@@ -75,7 +69,7 @@ namespace WindowsFormsApp2
 
         public List<Orders> GetOrders()
         {
-            List<Orders> OrdersList = new List<Orders>();
+            List<Orders> OrdersList = null;
             using (SqlConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["cn"].ConnectionString))
             {
                 if (db.State == ConnectionState.Closed)
@@ -85,15 +79,16 @@ namespace WindowsFormsApp2
                     OrdersList = db.Query<Orders>(cmd, commandType: CommandType.Text).ToList();
                     //return OrdersList;
                 }
-               
+
 
             }
             return OrdersList;
         }
 
+        //Get orders by id
         public Orders GetOrderById(int id)
         {
-            Orders order =new Orders();
+            Orders order = new Orders();
             using (SqlConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["cn"].ConnectionString))
             {
                 if (db.State == ConnectionState.Closed)
@@ -101,18 +96,36 @@ namespace WindowsFormsApp2
                     db.Open();
                     string cmd = $"select * from orders where OrderId = {id}";
                     order = db.Query<Orders>(cmd, commandType: CommandType.Text).FirstOrDefault();
-                  
+
 
                 }
-                  return order;//return null;
+                return order;//return null;
             }
+        }
+
+        // Get orders between two days    
+        public static List<Orders> GetOrdersBetweenToDates(string startDate, string endDate)
+        {
+            List<Orders> OrdersList = null;
+            using (SqlConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["cn"].ConnectionString))
+            {
+                if (db.State == ConnectionState.Closed)
+                {
+                    db.Open();
+                    string query = "select o.OrderID,c.CustomerID,c.ContactName,c.Address,c.PostalCode, c.City,c.Phone,o.OrderDate, o.Freight, o.ShipCity, o.ShipCountry from Orders o inner join Customers c on o.CustomerID = c.CustomerID " +
+                    $"where o.OrderDate between convert(varchar(25),'{startDate}',103) and convert(varchar(25),'{endDate}',103)";
+
+                    OrdersList = db.Query<Orders>(query, commandType: CommandType.Text).ToList();                
+                }
+            }
+            return OrdersList;
         }
 
         public bool Update()
         {
             IDbConnection db = new SqlConnection(ConfigurationManager.ConnectionStrings["cn"].ConnectionString);
-           
-                try
+
+            try
             {
                 if (db.State == ConnectionState.Closed)
                 {

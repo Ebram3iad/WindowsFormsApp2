@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions1 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
+            DevExpress.XtraEditors.Controls.EditorButtonImageOptions editorButtonImageOptions2 = new DevExpress.XtraEditors.Controls.EditorButtonImageOptions();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Invoice));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject3 = new DevExpress.Utils.SerializableAppearanceObject();
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject4 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject5 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject6 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject7 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject8 = new DevExpress.Utils.SerializableAppearanceObject();
             this.ordersBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.xtraTabControl1 = new DevExpress.XtraTab.XtraTabControl();
             this.xtraTabInvoice = new DevExpress.XtraTab.XtraTabPage();
@@ -103,6 +103,7 @@
             this.xtraTabStore = new DevExpress.XtraTab.XtraTabPage();
             this.filteringUIContext1 = new DevExpress.Utils.Filtering.FilteringUIContext(this.components);
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
+            this.btnNewOrder = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.ordersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xtraTabControl1)).BeginInit();
             this.xtraTabControl1.SuspendLayout();
@@ -310,9 +311,9 @@
             // Show
             // 
             this.Show.AutoHeight = false;
-            editorButtonImageOptions1.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions1.SvgImage")));
+            editorButtonImageOptions2.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("editorButtonImageOptions2.SvgImage")));
             this.Show.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions1, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, serializableAppearanceObject2, serializableAppearanceObject3, serializableAppearanceObject4, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Glyph, "", -1, true, true, false, editorButtonImageOptions2, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject5, serializableAppearanceObject6, serializableAppearanceObject7, serializableAppearanceObject8, "", null, null, DevExpress.Utils.ToolTipAnchor.Default)});
             this.Show.Name = "Show";
             this.Show.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.HideTextEditor;
             this.Show.Click += new System.EventHandler(this.Show_Click);
@@ -510,6 +511,7 @@
             // 
             // panelControl1
             // 
+            this.panelControl1.Controls.Add(this.btnNewOrder);
             this.panelControl1.Controls.Add(this.btnDelete);
             this.panelControl1.Controls.Add(this.label5);
             this.panelControl1.Controls.Add(this.label4);
@@ -534,9 +536,9 @@
             this.btnDelete.Appearance.Options.UseForeColor = true;
             this.btnDelete.AppearancePressed.BackColor = System.Drawing.Color.Red;
             this.btnDelete.AppearancePressed.Options.UseBackColor = true;
-            this.btnDelete.Location = new System.Drawing.Point(120, 71);
+            this.btnDelete.Location = new System.Drawing.Point(326, 72);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(171, 43);
+            this.btnDelete.Size = new System.Drawing.Size(178, 43);
             this.btnDelete.TabIndex = 12;
             this.btnDelete.Text = "Delete Order";
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -624,9 +626,9 @@
             this.btnSave.Appearance.Options.UseForeColor = true;
             this.btnSave.AppearancePressed.BackColor = System.Drawing.Color.Red;
             this.btnSave.AppearancePressed.Options.UseBackColor = true;
-            this.btnSave.Location = new System.Drawing.Point(5, 68);
+            this.btnSave.Location = new System.Drawing.Point(5, 72);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(94, 43);
+            this.btnSave.Size = new System.Drawing.Size(150, 43);
             this.btnSave.TabIndex = 5;
             this.btnSave.Text = "Save";
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -887,6 +889,23 @@
             this.xtraTabStore.Size = new System.Drawing.Size(1058, 507);
             this.xtraTabStore.Text = "Store";
             // 
+            // btnNewOrder
+            // 
+            this.btnNewOrder.Appearance.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btnNewOrder.Appearance.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNewOrder.Appearance.ForeColor = System.Drawing.Color.Transparent;
+            this.btnNewOrder.Appearance.Options.UseBackColor = true;
+            this.btnNewOrder.Appearance.Options.UseFont = true;
+            this.btnNewOrder.Appearance.Options.UseForeColor = true;
+            this.btnNewOrder.AppearancePressed.BackColor = System.Drawing.Color.Red;
+            this.btnNewOrder.AppearancePressed.Options.UseBackColor = true;
+            this.btnNewOrder.Location = new System.Drawing.Point(166, 72);
+            this.btnNewOrder.Name = "btnNewOrder";
+            this.btnNewOrder.Size = new System.Drawing.Size(150, 43);
+            this.btnNewOrder.TabIndex = 13;
+            this.btnNewOrder.Text = "New Order";
+            this.btnNewOrder.Click += new System.EventHandler(this.simpleButton1_Click);
+            // 
             // Invoice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -1018,5 +1037,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnShipCity;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
         private DevExpress.XtraEditors.SimpleButton btnDelete;
+        private DevExpress.XtraEditors.SimpleButton btnNewOrder;
     }
 }
